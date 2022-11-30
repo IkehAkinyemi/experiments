@@ -39,7 +39,7 @@ func TestDeadline(t *testing.T) {
 		}
 
 		sync <- struct{}{}
-		
+
 		err = conn.SetDeadline(time.Now().Add(5 * time.Second))
 		if err != nil {
 			t.Error(err)
