@@ -17,10 +17,13 @@ func Retries() {
 	if err != nil {
 		return // report err instead
 	}
+	defer listener.Close()
+
 	conn, err := listener.Accept()
 	if err != nil {
 		return // report err instead
 	}
+	defer conn.Close()
 
 	for ; maxTrial > 0; maxTrial-- {
 		n, err = conn.Write([]byte("Mission"))
