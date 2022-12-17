@@ -27,13 +27,3 @@ const (
 	ErrFileExists
 	ErrNoUser
 )
-
-// curl localhost:2019/config/apps/http/servers/test \ -X POST -H "Content-Type: application/json" \
-// -d '{
-//       "listen": ["localhost:2030"],
-//       "routes": [{
-//         "handle": [{
-//           "handler": "static_response",
-//           "body": "Welcome to my temporary test server."
-// }] }]
-// }'
