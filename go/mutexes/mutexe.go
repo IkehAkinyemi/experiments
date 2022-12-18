@@ -42,16 +42,21 @@ func main() {
 		wg.Add(1)
 		go func (filename string)  {
 			defer wg.Done()
-			
+
 			if err := tallyword(filename, w); err != nil {
 				fmt.Println(err.Error())
 			}
 		}(f)
 	}
+
+	wg.Wait()
+
+	fmt.Printf("%#v\n", w)
 }
 
 type words struct {
 	found map[string]int
+	sync.Mutex
 }
 
 func newWord() *words {
@@ -59,6 +64,9 @@ func newWord() *words {
 }
 
 func (w *words) add(word string, n int) {
+	w.Lock()
+	defer w.Unlock()
+	
 	count, ok := w.found[word]
 	if !ok {
 		w.found[word] = n

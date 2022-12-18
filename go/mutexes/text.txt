@@ -1,0 +1,1 @@
+That’s what you’d expect the output to look like. Now, if you pass in more than one filename, the tool will process each file in its own goroutine. Let’s try that:
