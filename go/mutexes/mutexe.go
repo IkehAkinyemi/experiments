@@ -66,7 +66,7 @@ func newWord() *words {
 func (w *words) add(word string, n int) {
 	w.Lock()
 	defer w.Unlock()
-	
+
 	count, ok := w.found[word]
 	if !ok {
 		w.found[word] = n
