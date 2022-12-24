@@ -1,22 +1,37 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"os"
-	"time"
+	"sync"
 )
 
 // go
 func main() {
-	var errNotFound = errors.New("db record doesn't exist")
-	var statusCode = 404
+	// Declare a new WaitGroup.
+	var wg sync.WaitGroup
 
-	// goroutine defintion syntax using closure.
-	go func() {
+	var employees = []string{
+		"first_emply@xyz.com",
+		"second_emply@xyz.com",
+		"third_emply@xyz.com",
+		"forth_emply@xyz.com",
+		"fifth_emply@xyz.com",
+	}
+	var sent int16
+
+	for _, employee := range employees {
+		wg.Add(1)
 		// code to run concurrently
-		fmt.Fprintf(os.Stdout, "db lookup error: %v with status code %d", errNotFound, statusCode)
-	}()
+		go func(emailAddr string) {
+			defer wg.Done()
 
-	time.Sleep(1 * time.Second)
+			// code to send email to employee
+			sent += 1
+		}(employee)
+	}
+
+	wg.Wait()
+	fmt.Printf("successfully sent %d mails\n", sent)
+
+	// continue other procedural execution
 }
