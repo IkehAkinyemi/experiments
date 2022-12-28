@@ -12,8 +12,8 @@ func UdpServer(ctx context.Context, addr string) (net.Addr, error) {
 		return nil, fmt.Errorf("binding udp %s: %w", addr, err)
 	}
 
-	go func ()  {
-		go func ()  {
+	go func() {
+		go func() {
 			<-ctx.Done()
 			s.Close()
 		}()

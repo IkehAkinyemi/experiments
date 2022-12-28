@@ -40,7 +40,7 @@ func main() {
 	w := newWord()
 	for _, f := range os.Args[1:] {
 		wg.Add(1)
-		go func (filename string)  {
+		go func(filename string) {
 			defer wg.Done()
 
 			if err := tallyword(filename, w); err != nil {

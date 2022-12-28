@@ -5,33 +5,38 @@ import (
 	"sync"
 )
 
-// go
+type acctBalance struct {
+	mu     sync.Mutex
+	amount int
+}
+
 func main() {
-	// Declare a new WaitGroup.
+
+	userAcct := acctBalance{amount: 100}
+
 	var wg sync.WaitGroup
+	wg.Add(2)
 
-	var employees = []string{
-		"first_emply@xyz.com",
-		"second_emply@xyz.com",
-		"third_emply@xyz.com",
-		"forth_emply@xyz.com",
-		"fifth_emply@xyz.com",
-	}
-	var sent int16
+	// Fund acct operation
+	go func() {
 
-	for _, employee := range employees {
-		wg.Add(1)
-		// code to run concurrently
-		go func(emailAddr string) {
-			defer wg.Done()
+		userAcct.mu.Lock()
+		defer userAcct.mu.Unlock()
 
-			// code to send email to employee
-			sent += 1
-		}(employee)
-	}
+		userAcct.amount += 40
+		wg.Done()
+	}()
+
+	// withdraw from acct operation
+	go func() {
+		userAcct.mu.Lock()
+		defer userAcct.mu.Unlock()
+
+		userAcct.amount -= 30
+		wg.Done()
+	}()
 
 	wg.Wait()
-	fmt.Printf("successfully sent %d mails\n", sent)
 
-	// continue other procedural execution
+	fmt.Print(userAcct.amount)
 }

@@ -95,7 +95,7 @@ func TestPingerAdvanceDeadline(t *testing.T) {
 
 		t.Logf("[%s] %s", time.Since(begin).Truncate(time.Second), buf[:n])
 	}
-	
+
 	<-done
 	end := time.Since(begin).Truncate(time.Second)
 	t.Logf("[%s] done", end)

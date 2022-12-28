@@ -60,6 +60,6 @@ func TestDialContextCancelFanOut(t *testing.T) {
 	if ctx.Err() != context.Canceled {
 		t.Errorf("expected canceled context; actual: %s", ctx.Err())
 	}
-	
+
 	t.Logf("dialer %d retrieved the resource", response)
 }

@@ -7,11 +7,11 @@ import (
 )
 
 var (
-	n int // bytes written
+	n        int // bytes written
 	maxTrial = 7 // maximum retries
 )
 
-//Mock a retries for adverse network
+// Mock a retries for adverse network
 func Retries() {
 	listener, err := net.Listen("tcp", "::1")
 	if err != nil {
@@ -30,11 +30,11 @@ func Retries() {
 		if err != nil {
 			if err, ok := err.(net.Error); ok && err.Temporary() {
 				log.Println(err)
-				time.Sleep(5*time.Second)
+				time.Sleep(5 * time.Second)
 				continue
 			}
 
-			return // report err 
+			return // report err
 		}
 		break
 	}

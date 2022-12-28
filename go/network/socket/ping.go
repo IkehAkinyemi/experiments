@@ -25,7 +25,7 @@ func Pinger(ctx context.Context, w io.Writer, reset <-chan time.Duration) {
 	}
 
 	timer := time.NewTimer(interval)
-	defer func ()  {
+	defer func() {
 		if !timer.Stop() {
 			<-timer.C
 		}
@@ -60,12 +60,12 @@ func TestExamplePinger(t *testing.T) {
 	resetTimer := make(chan time.Duration, 1)
 	resetTimer <- time.Second // initial Ping interval
 
-	go func () {
+	go func() {
 		Pinger(ctx, w, resetTimer)
 		close(done)
 	}()
 
-	receivePing := func (d time.Duration, r io.Reader)  {
+	receivePing := func(d time.Duration, r io.Reader) {
 		if d >= 0 {
 			fmt.Printf("resetting timer (%s)\n", d)
 			resetTimer <- d
@@ -82,7 +82,7 @@ func TestExamplePinger(t *testing.T) {
 	}
 
 	for i, v := range []int64{0, 200, 300, 0, -1, -1, -1} {
-		fmt.Printf("Run %d:\n", i + 1)
+		fmt.Printf("Run %d:\n", i+1)
 		receivePing(time.Duration(v)*time.Millisecond, r)
 	}
 

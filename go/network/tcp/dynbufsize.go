@@ -138,7 +138,7 @@ func decode(r io.Reader) (Payload, error) {
 	var payload Payload
 	switch typ {
 	case BinaryType:
-		payload = new(Binary)	
+		payload = new(Binary)
 	case StringType:
 		payload = new(String)
 		fmt.Printf("Here2.2: %+v\n", payload)

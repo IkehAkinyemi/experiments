@@ -49,6 +49,6 @@ func TestScanner(t *testing.T) {
 	if !reflect.DeepEqual(words, expected) {
 		t.Fatal("inaccurate scanned word list")
 	}
-	
+
 	t.Logf("Scanned words: %#v", words)
 }

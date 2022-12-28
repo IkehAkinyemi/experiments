@@ -21,7 +21,7 @@ func Trip() {
 		RoundTripper: http.DefaultTransport,
 	}
 
-	client := http.Client {
+	client := http.Client{
 		Transport: roundtripper,
 	}
 

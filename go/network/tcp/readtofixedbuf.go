@@ -10,7 +10,7 @@ import (
 func TestReadIntoBuffer(t *testing.T) {
 	payload := make([]byte, 1<<24) // 16 MB
 
-	_, err := rand.Read(payload)   // generate a random payload
+	_, err := rand.Read(payload) // generate a random payload
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -50,6 +50,6 @@ func TestReadIntoBuffer(t *testing.T) {
 		}
 		t.Logf("read %d bytes", n) // buf[:n] is the data read from conn
 	}
-	
+
 	conn.Close()
 }

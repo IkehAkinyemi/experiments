@@ -32,7 +32,7 @@ func TestDeadline(t *testing.T) {
 		}
 
 		buf := make([]byte, 1)
-		_, err = conn.Read(buf) // blocked until remote node sends data 
+		_, err = conn.Read(buf) // blocked until remote node sends data
 		nErr, ok := err.(net.Error)
 		if !ok || !nErr.Timeout() {
 			t.Errorf("expected timeout error; actual: %v", err)
@@ -50,7 +50,6 @@ func TestDeadline(t *testing.T) {
 			t.Error(err)
 		}
 	}()
-
 
 	conn, err := net.Dial("tcp", listener.Addr().String())
 	if err != nil {

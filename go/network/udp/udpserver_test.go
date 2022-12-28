@@ -15,7 +15,7 @@ func TestUDPServer(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	
+
 	client, err := net.ListenPacket("udp", "127.0.0.1:")
 	if err != nil {
 		t.Fatal(err)
