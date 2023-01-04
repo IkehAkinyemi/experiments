@@ -33,8 +33,8 @@ export const pipe = <T>(fn1: (a: T) => T, ...fns: Array<(a: T) => T>) =>
 
 
 
-const compose = <T>(fn1: (a: T) => T, ...fns: Array<(a: T) => T>) =>
-fns.reduce((prevFn, nextFn) => value => prevFn(nextFn(value)), fn1); 
+// const compose = <T>(fn1: (a: T) => T, ...fns: Array<(a: T) => T>) =>
+// fns.reduce((prevFn, nextFn) => value => prevFn(nextFn(value)), fn1); 
 
 const compose = <T extends any[], U>(
   fn1: (...args: T) => U,
