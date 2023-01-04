@@ -15,20 +15,20 @@ const func2 = (v: string) => `func2(${v})`;
 const func3 = (v: string) => `func3(${v})`;
 
 
-// export const pipe = <T extends any[], R>(
-//   fn1: (...args: T) => R,
-//   ...fns: Array<(a: R) => R>
-// ) => {
-//   const piped = fns.reduce((prevFn, nextFn) => (value: R) => nextFn(prevFn(value)), value => value);
-//   return (...args: T) => piped(fn1(...args));
-// };
+export const pipe = <T extends any[], R>(
+  fn1: (...args: T) => R,
+  ...fns: Array<(a: R) => R>
+) => {
+  const piped = fns.reduce((prevFn, nextFn) => (value: R) => nextFn(prevFn(value)), value => value);
+  return (...args: T) => piped(fn1(...args));
+};
 
-// const pipedFunction = pipe(func1, func2, func3);
-// console.log(pipedFunction("value1", "value2"));
+const pipedFunction = pipe(func1, func2, func3);
+console.log(pipedFunction("value1", "value2"));
 
 
-export const pipe = <T>(fn1: (a: T) => T, ...fns: Array<(a: T) => T>) =>
-  fns.reduce((prevFn, nextFn) => value => nextFn(prevFn(value)), fn1); 
+// export const pipe = <T>(fn1: (a: T) => T, ...fns: Array<(a: T) => T>) =>
+//   fns.reduce((prevFn, nextFn) => value => nextFn(prevFn(value)), fn1); 
 
 
 
