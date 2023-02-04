@@ -23,7 +23,7 @@ func main() {
 	defer chann.Close()
 
 	q, err := chann.QueueDeclare(
-		"hello world",
+		"hello",
 		false,
 		false,
 		false,
