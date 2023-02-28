@@ -8,7 +8,7 @@ Some of these are mostly snippets of snippets from articles, tutorial, small pro
 This kind of rough idea💡 help me build more on them to form a working sample that I could possibly incude in a 📽project/production📽. They're not complete.
 
 ### Structure
-I've organized the snippets by language, library or framework, each having its own directories. The title of each file should give a half baked clue about its context. Please note⚠️⚠️, however, that some of these are written quickly and aren't necessarily well documented. They're in professional terms "prototype" or "experimental" code.
+I've organized the snippets by language, library or framework, each having its own directories. The title of each file should give a half baked clue about its context. Please note⚠️, however, that some of these are written quickly and aren't necessarily well documented. They're in professional terms "prototype" or "experimental" code.
 
 ### Disclaimer
 I make no guarantee of any of these code samples functioning or serving any specific need. I do try to mark code that doesn't work, though. These programs are here primarily for educational or reference value.
