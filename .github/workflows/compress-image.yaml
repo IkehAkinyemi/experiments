@@ -26,6 +26,10 @@ jobs:
           git config --local user.name "IkehAkinyemi"
           git add -A
           git commit -m "Compressed images"
+      - name: Pull Changes
+        uses: actions/checkout@v2
+        with:
+          ref: ft/compress-image-ci
       - name: Push Changes
         uses: ad-m/github-push-action@master
         with:
