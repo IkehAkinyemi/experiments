@@ -25,6 +25,7 @@ jobs:
           git config --local user.email "mrikehchukwuka@gmail.com"
           git config --local user.name "IkehAkinyemi"
           git add -A
+          git checkout ft/compress-image-ci
           git branch
           git commit -m "Compressed images"
       - name: Pull Changes
