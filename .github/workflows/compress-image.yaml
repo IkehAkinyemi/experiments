@@ -22,10 +22,12 @@ jobs:
         run: ls -lR assets/img/
       - name: Commit Changes
         run: |
-          ls -a
           git config --local user.email "mrikehchukwuka@gmail.com"
           git config --local user.name "IkehAkinyemi"
           git add -A
           git commit -m "Compressed images"
-          git push origin ft/compress-image-ci
-
+      - name: Push Changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ft/compress-image-ci
