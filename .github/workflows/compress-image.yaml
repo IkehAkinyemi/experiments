@@ -25,15 +25,12 @@ jobs:
           git config --local user.email "mrikehchukwuka@gmail.com"
           git config --local user.name "IkehAkinyemi"
           git add -A
-          git checkout ft/compress-image-ci
-          git branch
           git commit -m "Compressed images"
       - name: Pull Changes
         uses: actions/checkout@v2
         with:
           ref: ft/compress-image-ci
       - name: Push Changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ft/compress-image-ci
+        run: git push origin ft/compress-image-ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
