@@ -1,0 +1,30 @@
+name: Compress Images
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  compress_images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Show Image Sizes Before Compression
+        run: ls -lR assets/img/
+      - name: Install Dependencies
+        run: sudo apt-get install -y imagemagick
+      - name: Compress Images
+        run: mogrify -resize 50% -quality 50 -path assets/img/ $(find assets/img/ -regextype posix-extended -regex $REGEX)
+        env:
+          REGEX: '^assets/img/.*\.(jpg|png|jpeg)$'
+      - name: Show Image Sizes After Compression
+        run: ls -lR assets/img/
+      - name: Commit Changes
+        run: |
+          git config --local user.email "mrikehchukwuka@gmail.com"
+          git config --local user.name "IkehAkinyemi"
+          git add -A
+          git commit -m "Compressed images"
+          git push origin ft/compress-image-ci
+
