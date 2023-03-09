@@ -1,4 +1,5 @@
-name: Compress Images
+name: Images
+
 on:
   pull_request:
     branches: [ main ]
