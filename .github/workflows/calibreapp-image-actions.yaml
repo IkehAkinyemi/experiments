@@ -3,6 +3,12 @@ name: Images
 on:
   pull_request:
     branches: [ main ]
+    paths:
+      - '**.jpg'
+      - '**.jpeg'
+      - '**.png'
+      - '**.webp'
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
