@@ -14,8 +14,7 @@ on:
       - '**.png'
       - '**.webp'
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths:
       - '**.jpg'
       - '**.jpeg'
