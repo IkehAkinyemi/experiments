@@ -1,0 +1,81 @@
+swagger: "2.0"
+info:
+  description: "This is an e-commerce API"
+  version: "1.0.0"
+  title: "E-commerce API"
+host: "localhost:8080"
+basePath: "/"
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /products:
+    get:
+      summary: "Get all products"
+      responses:
+        200:
+          description: "OK"
+        500:
+          description: "Internal server error"
+    post:
+      summary: "Create a new product"
+      parameters:
+        - name: "product"
+          in: "body"
+          description: "Product object"
+          required: true
+          schema:
+            $ref: "#/definitions/Product"
+      responses:
+        201:
+          description: "Created"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+  /products/{id}:
+    get:
+      summary: "Get a product by ID"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Product ID"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Product"
+        404:
+          description: "Product not found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+definitions:
+  Product:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      description:
+        type: "string"
+      price:
+        type: "number"
+      quantity:
+        type: "integer"
+  ErrorResponse:
+    type: "object"
+    properties:
+      error:
+        type: "string"
+      message:
+        type: "string"
