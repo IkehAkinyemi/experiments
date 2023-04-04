@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net"
 	"os"
 	"syscall"
@@ -23,12 +24,18 @@ func main() {
 		os.Exit(1)
 	}
 
+	file, err := ln.(*net.TCPListener).File()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fd := file.Fd()
+
 	// Add the listening socket to the epoll interest list
 	event := syscall.EpollEvent{
 		Events: syscall.EPOLLIN,
-		Fd:     int32(ln.(*net.TCPListener).Fd()),
+		Fd:     int32(fd),
 	}
-	if err := syscall.EpollCtl(epollFD, syscall.EPOLL_CTL_ADD, int(ln.(*net.TCPListener).Fd()), &event); err != nil {
+	if err := syscall.EpollCtl(epollFD, syscall.EPOLL_CTL_ADD, int(fd), &event); err != nil {
 		fmt.Println("Error adding listening socket to epoll interest list:", err)
 		os.Exit(1)
 	}
@@ -44,21 +51,21 @@ func main() {
 
 		// Handle incoming events
 		for i := 0; i < n; i++ {
-			if int(events[i].Fd) == int(ln.(*net.TCPListener).Fd()) {
+			if int(events[i].Fd) == int(fd) {
 				// Handle incoming connection
-				conn, err := ln.Accept()
+				_, err := ln.Accept()
 				if err != nil {
 					fmt.Println("Error accepting connection:", err)
 					continue
 				}
 
 				// Add the new client socket to the epoll interest list
-				clientFD := int(conn.(*net.TCPConn).Fd())
+				clientFD := fd
 				event := syscall.EpollEvent{
-					Events: syscall.EPOLLIN | syscall.EPOLLET,
+					Events: uint32(syscall.EPOLLIN),
 					Fd:     int32(clientFD),
 				}
-				if err := syscall.EpollCtl(epollFD, syscall.EPOLL_CTL_ADD, clientFD, &event); err != nil {
+				if err := syscall.EpollCtl(epollFD, syscall.EPOLL_CTL_ADD, int(clientFD), &event); err != nil {
 					fmt.Println("Error adding client socket to epoll interest list:", err)
 					continue
 				}
