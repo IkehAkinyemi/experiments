@@ -36,7 +36,7 @@ func main() {
   return
  }
 
- // Wait for new connections
+ // Wait for new connections on a listener
  for {
   // Accept new connections
   c, err := l.Accept()
