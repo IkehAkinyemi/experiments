@@ -1,0 +1,19 @@
+{
+  "name": "another-trial2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "dependencies": {
+    "another-trial": "^1.0.0",
+    "brightton": "^1.0.0",
+    "capitalize-string": "^0.0.4",
+    "random-hex-color": "^1.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

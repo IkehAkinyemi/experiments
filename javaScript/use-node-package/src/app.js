@@ -1,3 +1,3 @@
-import dg from "digx-package"
+const dig = require("digx-package");
 
-console.log(dg({ test: [1, 2, 3] }, "test[0]"))
+console.log(dig.default({ test: [1, 2, 3] }, "test[0]"))
