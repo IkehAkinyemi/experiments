@@ -1,15 +1,31 @@
 #include <stdio.h>
+#include <string.h>
 
-float sum_element(float a[], unsigned length) {
+float sum_element(float a[], int length) {
   int i;
   float result = 0;
 
-  if (length != 0) {
   for (i = 0; i <= length-1; i++)
     result += a[i];
-  }
-  
+
   return result;
+}
+// float sum_element(float a[], unsigned length) {
+//   int i;
+//   float result = 0;
+
+//   if (length != 0) {
+//   for (i = 0; i <= length-1; i++)
+//     result += a[i];
+//   }
+
+//   return result;
+// }
+
+// Determine whether string s is longer than string t
+// WARNING: This function is buggy
+int strlonger(char *s, char *t) {
+  return strlen(s) - strlen(t) > 0;
 }
 
 int main() {
