@@ -24,7 +24,7 @@ fn main() {
         for _ in 0..5 {
             let shared_state = Arc::clone(&shared_state_async);
             let handle = task::spawn(async move {
-                let mut data = shared_state.lock().unwrap().await;
+                let mut data = shared_state.lock().unwrap();
                 // Simulate some asynchronous computation
                 *data += 1;
                 println!("Asynchronous data: {}", *data);
