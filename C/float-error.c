@@ -31,6 +31,9 @@ int strlonger(char *s, char *t) {
 int main() {
   float a[] = {1, 2, 3, 4};
   float sum = sum_element(a, 0);
-  printf("%.2f", sum);
+  // printf("%.2f", sum);
+
+  int bool = strlonger("c", "CCC");
+  printf("%d", bool);
   return 0;
 }
