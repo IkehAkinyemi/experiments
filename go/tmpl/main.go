@@ -2,16 +2,13 @@ package main
 
 import (
 	"html/template"
-	"math/rand"
 	"net/http"
-	"time"
 )
 
 func process(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("tmpl.html")
-	// t, _ := template.ParseGlob("*.html")
-	rand.NewSource(time.Now().Unix())
-	t.Execute(w, rand.Intn(10) > 5)
+	d := []string{"Mon", "Tue", "Wed", "Thurs", "Fri", "Sat", "Sun"}
+	t.Execute(w, d)
 }
 
 func main() {
