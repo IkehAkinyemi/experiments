@@ -7,6 +7,10 @@
     <title>Go Web programming</title>
   </head>
   <body>
-    <div>{{ . }}</div>
+    <form action="/process" method="post">
+      Comment: <input name="comment" type="text">
+      <hr/>
+      <button id="submit">submit</button>
+    </form>
   </body>
 </html>

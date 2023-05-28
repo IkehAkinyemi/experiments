@@ -6,20 +6,20 @@ import (
 )
 
 func process(w http.ResponseWriter, r *http.Request) {
-	t:= template.New("tmpl.html")
-	t, err := t.ParseFiles("tmpl.html", "t2.html")
-	if err != nil {
-		http.Error(w, "error occurred", http.StatusInternalServerError)
-		return
-	}
-	c := `I asked: <i>"What's up?"</i>`
-	t.Execute(w, c)
+	t, _ := template.ParseFiles("tmpl.html")
+	t.Execute(w, r.FormValue("comment"))
+}
+
+func form(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("form.html")
+	t.Execute(w, nil)
 }
 
 func main() {
 	s := http.Server{
 		Addr: ":8900",
 	}
-	http.HandleFunc("/", process)
+	http.HandleFunc("/process", process)
+	http.HandleFunc("/form", form)
 	s.ListenAndServe()
 }
