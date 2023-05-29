@@ -8,7 +8,11 @@
     <title>Go Web programming</title>
   </head>
   <body>
-    <div>{{ template "content" }}</div>
+    <div>
+      {{ block "content" . }}
+      <h1 style="color: blue">Hello world!</h1>
+      {{ end }}
+    </div>
   </body>
 </html>
 {{ end }}
