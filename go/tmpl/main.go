@@ -2,18 +2,20 @@ package main
 
 import (
 	"html/template"
+	"math/rand"
 	"net/http"
+	"time"
 )
 
 func process(w http.ResponseWriter, r *http.Request) {
-	t := template.New("tmpl.html")
-	t, _ = t.ParseFiles("tmpl.html")
-	t.Execute(w, template.HTML(r.FormValue("comment")))
-}
-
-func form(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("form.html")
-	t.Execute(w, nil)
+	rand.NewSource(time.Now().Unix())
+	var t *template.Template
+	if rand.Intn(10) > 5 {
+		t, _ = template.ParseFiles("tmpl.html", "red_hello.html")
+	} else {
+		t, _ = template.ParseFiles("tmpl.html", "blue_hello.html")
+	}
+	t.ExecuteTemplate(w, "layout", "")
 }
 
 func main() {
@@ -21,6 +23,5 @@ func main() {
 		Addr: ":8900",
 	}
 	http.HandleFunc("/process", process)
-	http.HandleFunc("/form", form)
 	s.ListenAndServe()
 }
