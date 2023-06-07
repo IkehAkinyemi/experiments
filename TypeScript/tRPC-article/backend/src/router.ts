@@ -25,16 +25,6 @@ type Context = inferAsyncReturnType<typeof createContext>;
 const t = initTRPC.context<Context>().create();
 
 const trpcRouter = t.router({
-  create: t.procedure
-    .input(
-      z.object({ name: z.string().max(50) }),
-    )
-    .mutation((opts) => {
-      const { input } = opts;
-      const newCat: Cat = { id: newId(), name: input.name };
-      cats.push(newCat)
-      return newCat
-    }),
   get: t.procedure.input(z.number()).output(Cat).query((opts) => {
     const { input } = opts;
     const foundCat = cats.find((cat => cat.id === input));
@@ -49,6 +39,16 @@ const trpcRouter = t.router({
   list: t.procedure.output(Cats).query(() => {
     return cats;
   }),
+  create: t.procedure
+    .input(
+      z.object({ name: z.string().max(50) }),
+    )
+    .mutation((opts) => {
+      const { input } = opts;
+      const newCat: Cat = { id: newId(), name: input.name };
+      cats.push(newCat)
+      return newCat
+    }),
   delete: t.procedure.output(z.string()).input(z.object({ id: z.number() })).mutation((opts) => {
     const { input } = opts;
 
