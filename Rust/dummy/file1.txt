@@ -1,0 +1,2 @@
+Within each thread's execution, the file is opened, and its contents are read line by line, storing
+them in a vector of strings.

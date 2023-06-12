@@ -1,0 +1,1 @@
+In this snippet, a vector of file paths and a `shared_data` variable of type 
