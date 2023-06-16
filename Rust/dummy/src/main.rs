@@ -1,39 +1,40 @@
-use std::sync::{Arc, Mutex, Condvar};
+use std::sync::mpsc;
 use std::thread;
+use std::time::{Duration, Instant};
 
-fn count_to_10(shared_data: Arc<(Mutex<u32>, Condvar)>, thread_num: u32) {
-    let &(ref mutex, ref cvar) = &*shared_data;
-    let mut count = mutex.lock().unwrap();
+fn worker(receiver: mpsc::Receiver<Instant>) {
+    loop {
+        let deadline = match receiver.recv() {
+            Ok(deadline) => deadline,
+            Err(_) => break,
+        };
 
-    while *count < 10 {
-        if *count % 3 == thread_num {
-            println!("Thread {} counting: {}", thread_num, *count);
-            *count += 1;
-            cvar.notify_all();
+        let now = Instant::now();
+        if now >= deadline {
+            println!("Worker received a task after the deadline!");
         } else {
-            count = cvar.wait(count).unwrap();
+            let remaining_time = deadline - now;
+            println!("Worker received a task. Deadline in {:?}.", remaining_time);
+            thread::sleep(remaining_time);
+            println!("Task completed!");
         }
     }
 }
 
 fn main() {
-    
-}
+    let (sender, receiver) = mpsc::channel();
 
-#[test]
-fn test_count_to_10() {
-    let shared_data = Arc::new((Mutex::new(0), Condvar::new()));
-    let mut handles = Vec::new();
+    let worker_handle = thread::spawn(move || {
+        worker(receiver);
+    });
 
-    for i in 0..3 {
-        let shared_data = shared_data.clone();
-        let handle = thread::spawn(move || {
-            count_to_10(shared_data, i);
-        });
-        handles.push(handle);
-    }
+    // Sending tasks with different deadlines
+    sender.send(Instant::now() + Duration::from_secs(3)).unwrap();
+    sender.send(Instant::now() + Duration::from_secs(5)).unwrap();
+    sender.send(Instant::now() + Duration::from_secs(7)).unwrap();
+    sender.send(Instant::now() + Duration::from_secs(4)).unwrap();
 
-    for handle in handles {
-        handle.join().unwrap();
-    }
+    // Signal no more tasks and wait for the worker to finish
+    drop(sender);
+    worker_handle.join().unwrap();
 }
