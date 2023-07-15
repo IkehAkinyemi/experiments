@@ -1,3 +1,3 @@
-`Arc<Mutex<Vec<String>>>` are created. Then you spawn three threads to read each file simultaneously. 
-For each file path, a new `Arc` reference is created, 
-allowing each thread to possess its own reference to the shared data, ensuring safe concurrent access.
+Set deliverable 
+before 
+you burnout.
