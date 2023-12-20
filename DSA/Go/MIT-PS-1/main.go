@@ -22,6 +22,10 @@ func ReorderStudents(ll *LL) {
 			break
 		}
 		h = s
+		if f.Next == nil {
+			s, f = s.Next, f.Next
+			break
+		}
 		s, f = s.Next, f.Next.Next
 	}
 
@@ -79,7 +83,7 @@ func (ll *LL) String() string {
 }
 
 func main() {
-	ll := BuildLinkedList(1, 2, 3, 4, 5, 6)
+	ll := BuildLinkedList(1, 2, 3, 4, 5, 6, 7, 8, 9)
 	fmt.Printf("%s\n", ll)
 
 	ReorderStudents(ll)
