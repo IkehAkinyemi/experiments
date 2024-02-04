@@ -72,45 +72,45 @@
 //   printf("%d %d %d\n", nl, nw, nc);
 // }
 
-#define MAX_WORD_LENGTH 20
-#define OUT 0
-#define IN 1
+// #define MAX_WORD_LENGTH 20
+// #define OUT 0
+// #define IN 1
 
-int main() {
-  int c, i, j, nc, state;
-  int word_length[MAX_WORD_LENGTH];
+// int main() {
+//   int c, i, j, nc, state;
+//   int word_length[MAX_WORD_LENGTH];
 
-  state = OUT;
-  nc = 0; // number of characters in a word
+//   state = OUT;
+//   nc = 0; // number of characters in a word
 
-  for (i = 0; i < MAX_WORD_LENGTH; ++i) {
-    word_length[i] = 0;
-  }
+//   for (i = 0; i < MAX_WORD_LENGTH; ++i) {
+//     word_length[i] = 0;
+//   }
   
-  // Read characters
-  while ((c = getchar()) != EOF) {
-    if (c == ' ' || c == '\n' || c == '\t') {
-      if (state == IN) {
-        if (nc < MAX_WORD_LENGTH)
-          ++word_length[nc];
+//   // Read characters
+//   while ((c = getchar()) != EOF) {
+//     if (c == ' ' || c == '\n' || c == '\t') {
+//       if (state == IN) {
+//         if (nc < MAX_WORD_LENGTH)
+//           ++word_length[nc];
 
-        state = OUT;
-        nc = 0;
-      }
-    } else if (state == OUT) {
-      state = IN;
-      nc = 1; // Start of new word
-    } else {
-      ++nc; // Inside a word
-    }
-  }
+//         state = OUT;
+//         nc = 0;
+//       }
+//     } else if (state == OUT) {
+//       state = IN;
+//       nc = 1; // Start of new word
+//     } else {
+//       ++nc; // Inside a word
+//     }
+//   }
 
-  // Print the horizontal histogram
-  for (i = 1; i < MAX_WORD_LENGTH; ++i) {
-    printf("%2d: ", i);
-    for (j = 0; j < word_length[i]; ++j) {
-      putchar('*');
-    }
-    putchar('\n');
-  }
-}
+//   // Print the horizontal histogram
+//   for (i = 1; i < MAX_WORD_LENGTH; ++i) {
+//     printf("%2d: ", i);
+//     for (j = 0; j < word_length[i]; ++j) {
+//       putchar('*');
+//     }
+//     putchar('\n');
+//   }
+// }
