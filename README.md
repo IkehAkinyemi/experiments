@@ -1,4 +1,4 @@
-### Quick intro
+### Experiments [Quick intro]
 This repository contains experimental code snippets that I want to have, but don't deserve their own repository.
 
 It's a collection of little snippets of programs I've tinker with when I test out flickering-bulb ideas, meaning some are written quickly and off the cuff.
